@@ -1,9 +1,9 @@
-
 FROM node:19-alpine3.15 as dev
 WORKDIR /app
 COPY package.json ./
 RUN yarn install
-CMD [ "yarn", "start:dev" ]
+CMD [ "yarn","start:dev" ]
+
 
 
 FROM node:19-alpine3.15 as dev-deps
@@ -16,7 +16,7 @@ FROM node:19-alpine3.15 as builder
 WORKDIR /app
 COPY --from=dev-deps /app/node_modules ./node_modules
 COPY . .
-# RUN yarn test crea la carpeta de distribucion
+# RUN yarn test
 RUN yarn build
 
 FROM node:19-alpine3.15 as prod-deps
